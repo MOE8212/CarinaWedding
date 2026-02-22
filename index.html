@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carina Eckert – Freie Traurednerin & Hochzeitsservice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --warm-white: #FFFDF9;
+            --sage: #A8B5A0;
+            --sage-dark: #7A8C70;
+            --blush: #E8D5CC;
+            --blush-deep: #D4B5A5;
+            --charcoal: #2C2C2C;
+            --soft-black: #1A1A1A;
+            --text-muted: #6B6B6B;
+            --gold: #C5A572;
+            --gold-light: #D4BC8E;
+            --border: rgba(197, 165, 114, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 3px; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000; padding: 1.2rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.5s ease; background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 30px rgba(0,0,0,0.04);
+            padding: 0.8rem 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+            font-weight: 500; color: white; text-decoration: none; letter-spacing: 0.02em;
+            transition: color 0.5s;
+        }
+        nav.scrolled .nav-logo { color: var(--soft-black); }
+
+        .nav-logo span {
+            display: block; font-size: 0.55rem; font-family: 'Jost', sans-serif;
+            font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase;
+            color: var(--gold-light); margin-top: -2px;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+        .nav-links a {
+            text-decoration: none; color: rgba(255,255,255,0.85); font-size: 0.82rem;
+            font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+            position: relative; transition: color 0.3s;
+        }
+        nav.scrolled .nav-links a { color: var(--charcoal); }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--gold); transition: width 0.4s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--gold) !important; }
+
+        .nav-cta {
+            padding: 0.6rem 1.6rem; border: 1px solid var(--gold-light);
+            color: var(--gold-light) !important; transition: all 0.4s ease !important;
+            letter-spacing: 0.15em !important;
+        }
+        nav.scrolled .nav-cta { border-color: var(--gold); color: var(--gold) !important; }
+        .nav-cta:hover { background: var(--gold) !important; color: white !important; }
+        .nav-cta::after { display: none !important; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
+        .hamburger span { width: 25px; height: 1.5px; background: white; transition: all 0.3s ease; }
+        nav.scrolled .hamburger span { background: var(--charcoal); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; position: relative; overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80') center center / cover no-repeat;
+            transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom { 0% { transform: scale(1.05); } 100% { transform: scale(1.12); } }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(26,26,26,0.25) 0%, rgba(26,26,26,0.45) 50%, rgba(26,26,26,0.6) 100%);
+        }
+
+        .hero-content {
+            text-align: center; padding: 2rem; position: relative; z-index: 2; max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.45em;
+            text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.5rem;
+            opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300; line-height: 1.1; color: white; margin-bottom: 0.5rem;
+            opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
+        }
+        .hero-title em { font-style: italic; font-weight: 300; color: var(--gold-light); }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300; font-style: italic; color: rgba(255,255,255,0.7); margin-bottom: 2.5rem;
+            opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .hero-divider {
+            width: 60px; height: 1px; background: var(--gold-light); margin: 0 auto 2.5rem;
+            opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+        }
+
+        .hero-description {
+            font-size: 0.95rem; color: rgba(255,255,255,0.75); max-width: 520px;
+            margin: 0 auto 2.5rem; line-height: 1.9;
+            opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .hero-btn {
+            display: inline-block; padding: 1rem 3rem; background: var(--gold); color: white;
+            text-decoration: none; font-size: 0.75rem; letter-spacing: 0.25em;
+            text-transform: uppercase; font-family: 'Jost', sans-serif; font-weight: 400;
+            transition: all 0.5s ease; opacity: 0; animation: fadeUp 1s ease 1.1s forwards;
+            position: relative; overflow: hidden;
+        }
+        .hero-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+        .hero-btn:hover::before { left: 100%; }
+        .hero-btn:hover { background: var(--sage-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(122, 140, 112, 0.35); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            opacity: 0; animation: fadeUp 1s ease 1.5s forwards;
+        }
+        .scroll-indicator span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold-light), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+        @keyframes scrollPulse { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.3; transform: scaleY(0.6); } }
+
+        /* ===== SECTIONS COMMON ===== */
+        section { padding: 7rem 2rem; }
+        .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 1rem; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 300; text-align: center; color: var(--soft-black); margin-bottom: 1rem; line-height: 1.2; }
+        .section-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); text-align: center; max-width: 550px; margin: 0 auto 3.5rem; }
+        .section-divider { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
+
+        /* ===== IMAGE BANNER ===== */
+        .image-banner { height: 50vh; min-height: 350px; position: relative; overflow: hidden; }
+        .image-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .image-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(250,247,242,0.05), rgba(26,26,26,0.2)); }
+        .image-banner-text { position: absolute; bottom: 0; left: 0; right: 0; padding: 3rem 2rem; background: linear-gradient(to top, rgba(26,26,26,0.6), transparent); text-align: center; }
+        .image-banner-text p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-style: italic; font-weight: 300; color: white; max-width: 700px; margin: 0 auto; }
+
+        /* ===== ABOUT ===== */
+        .about { background: var(--warm-white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; align-items: center; }
+        .about-image-wrapper { position: relative; }
+        .about-image { width: 100%; aspect-ratio: 3/4; position: relative; overflow: hidden; }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .about-image:hover img { transform: scale(1.03); }
+        .about-image-frame { position: absolute; top: -15px; right: -15px; bottom: 15px; left: 15px; border: 1px solid var(--gold-light); pointer-events: none; }
+        .about-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--soft-black); }
+        .about-text h3 em { font-style: italic; color: var(--sage-dark); }
+        .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; font-size: 0.92rem; line-height: 1.9; }
+        .about-signature { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--gold); margin-top: 2rem; }
+
+        /* ===== SERVICES ===== */
+        .services { background: var(--cream); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .service-card { background: var(--warm-white); text-align: center; position: relative; transition: all 0.5s ease; border: 1px solid transparent; overflow: hidden; }
+        .service-card:hover { transform: translateY(-8px); border-color: var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.06); }
+        .service-card-image { width: 100%; height: 220px; overflow: hidden; }
+        .service-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .service-card:hover .service-card-image img { transform: scale(1.08); }
+        .service-card-content { padding: 2rem 2rem 2.5rem; }
+        .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.8rem; color: var(--soft-black); }
+        .service-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; }
+        .service-tag { display: inline-block; margin-top: 1.2rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 0.4rem 1rem; }
+
+        /* ===== GALLERY STRIP ===== */
+        .gallery-strip { padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); height: 35vh; min-height: 250px; overflow: hidden; }
+        .gallery-strip-item { overflow: hidden; position: relative; }
+        .gallery-strip-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .gallery-strip-item:hover img { transform: scale(1.1); }
+        .gallery-strip-item::after { content: ''; position: absolute; inset: 0; background: rgba(26,26,26,0.08); transition: background 0.4s ease; }
+        .gallery-strip-item:hover::after { background: transparent; }
+
+        /* ===== EXTRAS ===== */
+        .extras { background: var(--soft-black); color: white; position: relative; overflow: hidden; }
+        .extras::before { content: ''; position: absolute; inset: 0; opacity: 0.03; background-image: radial-gradient(circle at 30% 40%, var(--gold) 1px, transparent 1px), radial-gradient(circle at 70% 70%, var(--gold) 1px, transparent 1px); background-size: 60px 60px, 90px 90px; }
+        .extras .section-eyebrow { color: var(--gold-light); }
+        .extras .section-title { color: white; }
+        .extras .section-subtitle { color: rgba(255,255,255,0.5); }
+        .extras .section-divider { background: var(--gold); }
+        .extras-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+        .extra-item { padding: 0; border: 1px solid rgba(197, 165, 114, 0.15); transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .extra-item-image { width: 100%; height: 180px; overflow: hidden; }
+        .extra-item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.7); }
+        .extra-item:hover .extra-item-image img { transform: scale(1.08); filter: brightness(0.85); }
+        .extra-item-text { padding: 1.8rem 2rem; }
+        .extra-item:hover { border-color: rgba(197, 165, 114, 0.3); }
+        .extra-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.6rem; color: var(--gold-light); }
+        .extra-item p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+        /* ===== PROCESS ===== */
+        .process { background: var(--warm-white); position: relative; }
+        .process-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80') center center / cover no-repeat; opacity: 0.04; }
+        .process-steps { display: flex; justify-content: center; gap: 3rem; max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+        .process-steps::before { content: ''; position: absolute; top: 35px; left: 20%; right: 20%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-light), transparent); }
+        .process-step { text-align: center; flex: 1; position: relative; }
+        .step-number { width: 70px; height: 70px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); background: var(--warm-white); position: relative; z-index: 2; }
+        .process-step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--soft-black); }
+        .process-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; max-width: 220px; margin: 0 auto; }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonial-section { position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .testimonial-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80') center 40% / cover no-repeat; }
+        .testimonial-bg-overlay { position: absolute; inset: 0; background: rgba(26, 26, 26, 0.65); }
+        .testimonial-content { position: relative; z-index: 2; text-align: center; padding: 4rem 2rem; max-width: 700px; }
+        .testimonial-quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); line-height: 1; margin-bottom: 0.5rem; }
+        .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-style: italic; font-weight: 300; color: white; line-height: 1.8; margin-bottom: 1.5rem; }
+        .testimonial-author { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+
+        /* ===== CONTACT ===== */
+        .contact { background: var(--cream); }
+        .contact-wrapper { max-width: 650px; margin: 0 auto; }
+        .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+        .form-group input, .form-group textarea, .form-group select { background: var(--warm-white); border: 1px solid var(--border); padding: 1rem 1.2rem; font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 300; color: var(--charcoal); outline: none; transition: border-color 0.3s ease; -webkit-appearance: none; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+        .form-group textarea { resize: vertical; min-height: 140px; }
+        .form-submit { display: inline-block; padding: 1rem 3rem; background: var(--gold); color: white; border: none; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; font-family: 'Jost', sans-serif; font-weight: 400; cursor: pointer; transition: all 0.5s ease; align-self: center; margin-top: 1rem; }
+        .form-submit:hover { background: var(--sage-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(122, 140, 112, 0.25); }
+
+        /* ===== FOOTER ===== */
+        footer { background: var(--soft-black); color: rgba(255,255,255,0.4); padding: 4rem 2rem 2rem; text-align: center; }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: white; margin-bottom: 0.3rem; }
+        .footer-tagline { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 2rem; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold-light); }
+        .footer-divider { width: 40px; height: 1px; background: rgba(197, 165, 114, 0.3); margin: 2rem auto; }
+        .footer-copy { font-size: 0.72rem; letter-spacing: 0.05em; }
+        .footer-unsplash { font-size: 0.6rem; margin-top: 0.8rem; color: rgba(255,255,255,0.2); }
+        .footer-unsplash a { color: rgba(255,255,255,0.3); text-decoration: underline; }
+
+        /* ===== MOBILE OVERLAY ===== */
+        .mobile-menu { position: fixed; inset: 0; background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(30px); z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .mobile-menu.active { opacity: 1; pointer-events: all; }
+        .mobile-menu ul { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 2rem; }
+        .mobile-menu a { text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--soft-black); transition: color 0.3s; }
+        .mobile-menu a:hover { color: var(--gold); }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-image-wrapper { max-width: 400px; margin: 0 auto; }
+            .services-grid { grid-template-columns: 1fr; max-width: 450px; }
+            .extras-grid { grid-template-columns: 1fr; }
+            .process-steps { flex-direction: column; gap: 2rem; align-items: center; }
+            .process-steps::before { display: none; }
+            .gallery-strip { grid-template-columns: repeat(2, 1fr); height: 45vh; }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 5rem 1.5rem; }
+            nav { padding: 1rem 1.2rem; }
+            nav.scrolled { padding: 0.7rem 1.2rem; }
+            .nav-logo { font-size: 1.3rem; }
+            .hero-content { padding: 1.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .service-card-content { padding: 1.5rem 1.5rem 2rem; }
+            .extra-item-text { padding: 1.5rem; }
+            .footer-links { gap: 1.2rem; }
+            .gallery-strip { height: 30vh; min-height: 180px; }
+            .image-banner { height: 40vh; min-height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            Carina Eckert
+            <span>Freie Traurednerin</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#ueber-mich">Über mich</a></li>
+            <li><a href="#leistungen">Leistungen</a></li>
+            <li><a href="#rundum-service">Vermittlung</a></li>
+            <li><a href="#ablauf">So läuft's</a></li>
+            <li><a href="#kontakt" class="nav-cta">Anfrage</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#ueber-mich" onclick="toggleMenu()">Über mich</a></li>
+            <li><a href="#leistungen" onclick="toggleMenu()">Leistungen</a></li>
+            <li><a href="#rundum-service" onclick="toggleMenu()">Vermittlung</a></li>
+            <li><a href="#ablauf" onclick="toggleMenu()">So läuft's</a></li>
+            <li><a href="#kontakt" onclick="toggleMenu()">Anfragen</a></li>
+        </ul>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Freie Traurednerin aus Leidenschaft</p>
+            <h1 class="hero-title">Worte, die euer <em>Ja</em> unvergesslich machen</h1>
+            <p class="hero-subtitle">Persönlich. Emotional. Einzigartig wie eure Liebe.</p>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Ich gestalte Trauzeremonien, die eure Geschichte erzählen – 
+                authentisch, berührend und mit genau den Worten, 
+                die zu euch passen.
+            </p>
+            <a href="#kontakt" class="hero-btn">Unverbindlich anfragen</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Entdecken</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="ueber-mich">
+        <div class="section-eyebrow reveal">Über mich</div>
+        <h2 class="section-title reveal">Die Frau hinter den <em>Worten</em></h2>
+        <div class="section-divider reveal"></div>
+        <div class="section-subtitle reveal">Mit Herz & Hingabe für euren großen Tag</div>
+
+        <div class="about-grid">
+            <div class="about-image-wrapper reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80" alt="Carina Eckert – Freie Traurednerin" loading="lazy">
+                </div>
+                <div class="about-image-frame"></div>
+            </div>
+            <div class="about-text">
+                <h3 class="reveal">Hallo, ich bin <em>Carina</em></h3>
+                <p class="reveal reveal-delay-1">
+                    Schon als Kind haben mich Geschichten fasziniert – die Art, wie die richtigen Worte 
+                    Menschen berühren, zum Lachen bringen und Tränen der Freude hervorrufen können. 
+                    Als freie Traurednerin darf ich genau das tun: eure einzigartige Liebesgeschichte 
+                    in Worte fassen.
+                </p>
+                <p class="reveal reveal-delay-2">
+                    Jede Zeremonie, die ich gestalte, ist so individuell wie das Paar, das vor mir steht. 
+                    Kein Copy-Paste, keine Standard-Floskeln – sondern eure Geschichte, eure Emotionen, 
+                    euer Moment. Ob romantisch im Schlosspark, entspannt am See oder feierlich 
+                    in der Orangerie – ich bin da, wo ihr euch „Ja" sagen möchtet.
+                </p>
+                <div class="about-signature reveal reveal-delay-3">— Carina</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE BANNER -->
+    <div class="image-banner">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=80" alt="Elegante Hochzeitszeremonie im Garten" loading="lazy">
+        <div class="image-banner-overlay"></div>
+        <div class="image-banner-text">
+            <p>„Die schönsten Geschichten beginnen mit einem Ja."</p>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services" id="leistungen">
+        <div class="section-eyebrow reveal">Leistungen</div>
+        <h2 class="section-title reveal">Eure Zeremonie, <em>euer Weg</em></h2>
+        <div class="section-divider reveal"></div>
+        <div class="section-subtitle reveal">Jedes Paket wird individuell auf euch abgestimmt</div>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80" alt="Freie Trauung" loading="lazy">
+                </div>
+                <div class="service-card-content">
+                    <h3>Freie Trauung</h3>
+                    <p>Persönliches Vorgespräch, individuelle Rede, Generalprobe vor Ort und die feierliche Zeremonie – alles aus einem Guss.</p>
+                    <span class="service-tag">Kernleistung</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal reveal-delay-1">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80" alt="Eheversprechen" loading="lazy">
+                </div>
+                <div class="service-card-content">
+                    <h3>Eheversprechen</h3>
+                    <p>Ihr möchtet eure eigenen Worte finden? Ich helfe euch dabei, ein persönliches Eheversprechen zu formulieren.</p>
+                    <span class="service-tag">Zusatzleistung</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal reveal-delay-2">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Rituale und Symbole" loading="lazy">
+                </div>
+                <div class="service-card-content">
+                    <h3>Rituale & Symbole</h3>
+                    <p>Sand-Zeremonie, Handfasting, Zeitkapsel oder etwas ganz Eigenes – gemeinsam finden wir das Ritual, das zu euch passt.</p>
+                    <span class="service-tag">Inklusive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY STRIP -->
+    <div class="gallery-strip">
+        <div class="gallery-strip-item">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&q=80" alt="Hochzeitsdetail" loading="lazy">
+        </div>
+        <div class="gallery-strip-item">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Brautpaar im Garten" loading="lazy">
+        </div>
+        <div class="gallery-strip-item">
+            <img src="https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=600&q=80" alt="Hochzeitsdekoration" loading="lazy">
+        </div>
+        <div class="gallery-strip-item">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Brautstrauss" loading="lazy">
+        </div>
+    </div>
+
+    <!-- EXTRAS / VERMITTLUNG -->
+    <section class="extras" id="rundum-service">
+        <div class="section-eyebrow reveal">Rundum-Service</div>
+        <h2 class="section-title reveal">Mehr als nur <em style="color:var(--gold-light)">Worte</em></h2>
+        <div class="section-divider reveal"></div>
+        <div class="section-subtitle reveal">Ausgewählte Partner für euren perfekten Tag</div>
+
+        <div class="extras-grid">
+            <div class="extra-item reveal">
+                <div class="extra-item-image">
+                    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80" alt="Hochzeitsfotografie" loading="lazy">
+                </div>
+                <div class="extra-item-text">
+                    <h4>Hochzeitsfotografie</h4>
+                    <p>Talentierte Fotografen aus meinem Netzwerk, die eure schönsten Momente in zeitlosen Bildern festhalten.</p>
+                </div>
+            </div>
+            <div class="extra-item reveal reveal-delay-1">
+                <div class="extra-item-image">
+                    <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=800&q=80" alt="Dekoration und Floristik" loading="lazy">
+                </div>
+                <div class="extra-item-text">
+                    <h4>Dekoration & Floristik</h4>
+                    <p>Von der Tischdeko bis zum Blumenbogen – ausgewählte Anbieter für ein stimmiges Gesamtbild.</p>
+                </div>
+            </div>
+            <div class="extra-item reveal reveal-delay-2">
+                <div class="extra-item-image">
+                    <img src="https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=800&q=80" alt="Musik und Unterhaltung" loading="lazy">
+                </div>
+                <div class="extra-item-text">
+                    <h4>Musik & Unterhaltung</h4>
+                    <p>Ob Streichquartett, DJ oder Live-Band – die passende musikalische Begleitung für jeden Geschmack.</p>
+                </div>
+            </div>
+            <div class="extra-item reveal reveal-delay-3">
+                <div class="extra-item-image">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80" alt="Papeterie und Design" loading="lazy">
+                </div>
+                <div class="extra-item-text">
+                    <h4>Papeterie & Design</h4>
+                    <p>Einladungen, Menükarten und mehr – alles aus einer Hand für ein einheitliches Hochzeitskonzept.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="ablauf">
+        <div class="process-bg"></div>
+        <div class="section-eyebrow reveal">Der Weg zum Ja</div>
+        <h2 class="section-title reveal">So läuft's <em>ab</em></h2>
+        <div class="section-divider reveal"></div>
+        <div class="section-subtitle reveal">In vier Schritten zu eurer Traumzeremonie</div>
+
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <div class="step-number">01</div>
+                <h4>Kennenlernen</h4>
+                <p>Unverbindliches Erstgespräch – per Telefon, Video oder bei einem Kaffee.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-1">
+                <div class="step-number">02</div>
+                <h4>Eure Geschichte</h4>
+                <p>Im persönlichen Gespräch erfahre ich alles über euch, eure Liebe und eure Wünsche.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-2">
+                <div class="step-number">03</div>
+                <h4>Die Rede</h4>
+                <p>Ich schreibe eure individuelle Traurede – mit Abstimmungsrunden, bis alles perfekt ist.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-3">
+                <div class="step-number">04</div>
+                <h4>Euer großer Tag</h4>
+                <p>Ich begleite euch durch eine unvergessliche Zeremonie voller Emotion und Freude.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <div class="testimonial-section">
+        <div class="testimonial-bg"></div>
+        <div class="testimonial-bg-overlay"></div>
+        <div class="testimonial-content reveal">
+            <div class="testimonial-quote-mark">"</div>
+            <p class="testimonial-text">
+                Carina hat unsere Liebesgeschichte so wunderschön in Worte gefasst, 
+                dass es kein Auge gab, das trocken blieb. Wir sind unendlich dankbar 
+                für diese unvergessliche Zeremonie.
+            </p>
+            <p class="testimonial-author">— Lisa & Markus, Hochzeit am Schloss</p>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="section-eyebrow reveal">Kontakt</div>
+        <h2 class="section-title reveal">Erzählt mir von <em>euch</em></h2>
+        <div class="section-divider reveal"></div>
+        <div class="section-subtitle reveal">Ich freue mich darauf, euch und eure Geschichte kennenzulernen</div>
+
+        <div class="contact-wrapper">
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group reveal">
+                        <label for="name">Euer Name</label>
+                        <input type="text" id="name" placeholder="Vor- und Nachname" required>
+                    </div>
+                    <div class="form-group reveal reveal-delay-1">
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" placeholder="eure@email.de" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group reveal">
+                        <label for="date">Hochzeitsdatum</label>
+                        <input type="date" id="date">
+                    </div>
+                    <div class="form-group reveal reveal-delay-1">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Ort der Trauung">
+                    </div>
+                </div>
+                <div class="form-group reveal">
+                    <label for="interest">Interesse an</label>
+                    <select id="interest">
+                        <option value="">Bitte wählen...</option>
+                        <option value="trauung">Freie Trauung</option>
+                        <option value="trauung-plus">Trauung + Vermittlung</option>
+                        <option value="beratung">Erstmal nur Beratung</option>
+                    </select>
+                </div>
+                <div class="form-group reveal">
+                    <label for="message">Eure Nachricht</label>
+                    <textarea id="message" placeholder="Erzählt mir von euch, eurer Geschichte und euren Wünschen für den großen Tag..."></textarea>
+                </div>
+                <button type="submit" class="form-submit reveal">Nachricht senden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Carina Eckert</div>
+        <div class="footer-tagline">Freie Traurednerin</div>
+        <div class="footer-links">
+            <a href="#ueber-mich">Über mich</a>
+            <a href="#leistungen">Leistungen</a>
+            <a href="#rundum-service">Vermittlung</a>
+            <a href="#kontakt">Kontakt</a>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-copy">© 2026 Carina Eckert · Freie Traurednerin · Alle Rechte vorbehalten</div>
+        <div class="footer-unsplash">Fotos: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> (kostenlos & lizenzfrei)</div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        function toggleMenu() {
+            document.getElementById('hamburger').classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.form-submit');
+            btn.textContent = '✓ Nachricht gesendet!';
+            btn.style.background = '#7A8C70';
+            setTimeout(() => { btn.textContent = 'Nachricht senden'; btn.style.background = ''; e.target.reset(); }, 3000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
